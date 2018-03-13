@@ -35,7 +35,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.audio.effect@2.0-service \
     audio.primary.msm8960 \
     audio.a2dp.default \
     audio.usb.default \
@@ -275,6 +274,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors
+    
+PRODUCT_COPY_FILES += \
+device/asus/flo/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 # Dalvik/HWUI
 $(call inherit-product, frameworks/native/build/tablet-7in-xhdpi-2048-dalvik-heap.mk)
