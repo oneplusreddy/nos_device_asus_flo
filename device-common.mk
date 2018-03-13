@@ -41,8 +41,19 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     libaudio-resampler
 
+# Enable AAC 5.1 output
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.aac_51_output_enabled=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        debug.egl.recordable.rgba8888=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.qc.sensors.wl_dis=true \
+        ro.qualcomm.sensors.smd=true
+
 # Audio configuration
-USE_XML_AUDIO_POLICY_CONF := 1
+#USE_XML_AUDIO_POLICY_CONF := 1
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
@@ -79,6 +90,26 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     Snap
+
+# OMX
+PRODUCT_PACKAGES += \
+	libmmcamera_interface2 \
+	libmmcamera_interface \
+	libqomx_core
+
+PRODUCT_PACKAGES += \
+	mm-vdec-omx-test \
+	mm-venc-omx-test720p \
+	libdivxdrmdecrypt \
+	libOmxVdec \
+	libOmxVenc \
+	libOmxCore \
+	libstagefrighthw \
+	libc2dcolorconvert
+
+# Default OMX service to non-Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -150,11 +181,12 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_COPY_FILES += \
-    device/asus/flo/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
-    device/asus/flo/configs/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    device/asus/flo/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
+#    device/asus/flo/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    device/asus/flo/media_profiles.xml:system/etc/media_profiles.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    device/asus/flo/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    device/asus/flo/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
 # Misc
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
@@ -171,13 +203,6 @@ PRODUCT_CHARACTERISTICS := tablet,nosdcard
 #PRODUCT_COPY_FILES += \
 #    device/asus/flo/configs/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
 #    device/asus/flo/configs/nfc/libnfc-brcm-20791b05.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm-20791b05.conf
-
-# OMX
-PRODUCT_PACKAGES += \
-    libOmxVdec \
-    libOmxVenc \
-    libOmxCore \
-    libstagefrighthw
 
 # Permissions/features
 PRODUCT_COPY_FILES += \
